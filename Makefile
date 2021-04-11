@@ -8,4 +8,4 @@ dev-build:
 
 .PHONY: clean
 clean:
-	rm 'build.zip' 'dev-build.zip'
+	rm -f 'build.zip' 'dev-build.zip'
