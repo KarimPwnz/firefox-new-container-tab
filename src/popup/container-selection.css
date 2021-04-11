@@ -1,0 +1,45 @@
+html, body {
+    background-color: #0a84ff;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+* {
+    box-sizing: inherit;
+}
+
+#containers-input-wrapper {
+    width: 200px;
+}
+
+#containers-input-wrapper::before {
+    content: 'Open new tab in';
+    color: #fff;
+    display: block;
+    width: 100%;
+    padding: 4px 0 4px 8px;
+    font-size: 15px;
+}
+
+#containers-input {
+    color: #0c0c0d;
+    width: 100%;
+    padding: 8px;
+    border: none;
+    font-size: 30px;
+}
+
+#containers-input::placeholder {
+    color: #737373;
+}
+
+#containers-input:focus {
+    outline-style: none;
+}
+
+.error {
+    background-color: #d70022;
+}
