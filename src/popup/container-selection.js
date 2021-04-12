@@ -1,3 +1,5 @@
+import { storage } from "../storage.js";
+
 // Listeners
 
 browser.runtime.onMessage.addListener(handleRequest); // listen for messages from background
@@ -50,7 +52,7 @@ class ContainersBox {
     this.input.addEventListener("keydown", (e) => this._onkeydown(e));
   }
 
-  _oninput() {
+  async _oninput() {
     let prevVal = this._lastVal;
     this._lastVal = this.input.value;
     // Handle user backspacing (avoid forced search)
@@ -61,6 +63,10 @@ class ContainersBox {
       if (searchResults.length == 1) {
         let searchResult = searchResults[0];
         this.input.value = searchResult;
+        // Check if auto-open setting enabled
+        if (await storage.get("auto-open")) {
+          return this._sendAndDestruct();
+        }
         // Focus the suggestion (so user can remove it)
         this.input.setSelectionRange(this._lastVal.length, searchResult.length);
         this.input.focus();
