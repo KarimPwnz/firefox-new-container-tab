@@ -1,3 +1,5 @@
+import { storage } from "../storage.js";
+
 let optionsDOM = function () {
   // Properties
 
@@ -13,30 +15,21 @@ let optionsDOM = function () {
 
   this._showSettings = async () => {
     let val;
-    for (checkbox of this.checkboxes) {
-      val = await optionsStorage.get(checkbox.id);
+    for (let checkbox of this.checkboxes) {
+      val = await storage.get(checkbox.id);
       if (val) checkbox.checked = val;
     }
   };
 
   this._setListeners = () => {
-    for (checkbox of this.checkboxes) {
+    for (let checkbox of this.checkboxes) {
       checkbox.addEventListener("change", (e) => this._onchange(e));
     }
   };
 
   this._onchange = (e) => {
-    optionsStorage.save(e.target.id, e.target.checked);
+    storage.save(e.target.id, e.target.checked);
   };
-};
-
-let optionsStorage = {
-  get: async function (key) {
-    return (await browser.storage.sync.get(key))[key];
-  },
-  save: async function (key, value) {
-    browser.storage.sync.set({ [key]: value });
-  },
 };
 
 new optionsDOM().init();
