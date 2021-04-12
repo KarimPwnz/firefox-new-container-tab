@@ -1,35 +1,38 @@
 import { storage } from "../storage.js";
 
-let optionsDOM = function () {
-  // Properties
+let optionsDOM = (function () {
+  // Private properties
 
-  this.form = document.getElementById("options");
-  this.checkboxes = this.form.querySelectorAll("input[type='checkbox']");
+  let form = document.getElementById("options");
+  let checkboxes = form.querySelectorAll("input[type='checkbox']");
 
-  // Methods
+  // Private methods
 
-  this.init = () => {
-    this._showSettings();
-    this._setListeners();
-  };
-
-  this._showSettings = async () => {
+  let showSettings = async () => {
     let val;
-    for (let checkbox of this.checkboxes) {
+    for (let checkbox of checkboxes) {
       val = await storage.get(checkbox.id);
       if (val) checkbox.checked = val;
     }
   };
 
-  this._setListeners = () => {
-    for (let checkbox of this.checkboxes) {
-      checkbox.addEventListener("change", (e) => this._onchange(e));
+  let setListeners = () => {
+    for (let checkbox of checkboxes) {
+      checkbox.addEventListener("change", (e) => onchange(e));
     }
   };
 
-  this._onchange = (e) => {
+  let onchange = (e) => {
     storage.save(e.target.id, e.target.checked);
   };
-};
 
-new optionsDOM().init();
+  // Public methods
+  return {
+    init: () => {
+      showSettings();
+      setListeners();
+    }
+  }
+})();
+
+optionsDOM.init();
