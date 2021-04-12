@@ -10,8 +10,7 @@ let optionsDOM = (function () {
 
   let showSettings = async () => {
     for (let checkbox of checkboxes) {
-      let val = await storage.get(checkbox.id);
-      if (val) checkbox.checked = val;
+      checkbox.checked = Boolean(await storage.get(checkbox.id)); // also handles undefined
     }
   };
 
