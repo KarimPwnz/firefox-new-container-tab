@@ -8,3 +8,4 @@ Opening a new tab in a Firefox container is hell—you have to either hard press
 
 ![](misc/how-to.gif)
 
+![](misc/how-to-auto-open.gif)
