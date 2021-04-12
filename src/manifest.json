@@ -26,5 +26,11 @@
     }
   },
 
-  "permissions": ["cookies", "contextualIdentities"]
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox-new-container-tab@karimrahal.com"
+    }
+  },
+
+  "permissions": ["storage", "cookies", "contextualIdentities"]
 }
