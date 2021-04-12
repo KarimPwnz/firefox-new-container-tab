@@ -9,9 +9,8 @@ let optionsDOM = (function () {
   // Private methods
 
   let showSettings = async () => {
-    let val;
     for (let checkbox of checkboxes) {
-      val = await storage.get(checkbox.id);
+      let val = await storage.get(checkbox.id);
       if (val) checkbox.checked = val;
     }
   };
