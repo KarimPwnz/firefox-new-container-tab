@@ -7,7 +7,7 @@
   },
 
   "manifest_version": 2,
-  "version": "1.0",
+  "version": "1.1",
 
   "background": {
     "scripts": ["background.js"]
@@ -26,5 +26,16 @@
     }
   },
 
-  "permissions": ["cookies", "contextualIdentities"]
+  "options_ui": {
+    "page": "options/options.html",
+    "browser_style": true
+  },
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "firefox-new-container-tab@karimrahal.com"
+    }
+  },
+
+  "permissions": ["storage", "cookies", "contextualIdentities"]
 }
