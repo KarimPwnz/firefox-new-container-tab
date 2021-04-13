@@ -1,8 +1,8 @@
 export let storage = {
-  get: async function (key) {
+  async get(key) {
     return (await browser.storage.sync.get(key))[key];
   },
-  save: function (key, value) {
+  save(key, value) {
     return browser.storage.sync.set({ [key]: value });
   },
 };

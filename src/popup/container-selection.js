@@ -17,8 +17,8 @@ async function handleRequest(request) {
 // Background
 
 let background = {
-  send: function (request) {
-    browser.runtime.sendMessage(request);
+  send(request) {
+    return browser.runtime.sendMessage(request);
   },
 };
 
@@ -79,8 +79,7 @@ class ContainersBox {
   _onkeydown(e) {
     switch (e.key) {
       case "Enter":
-        if (this._inError) return;
-        this._sendAndDestruct();
+        if (!this._inError) this._sendAndDestruct();
         break;
     }
   }
@@ -117,9 +116,9 @@ class ContainersBox {
     window.close();
   }
 
-  async _sendSelectedContainer() {
+  _sendSelectedContainer() {
     let cookieStoreId = this.containers[this.input.value];
-    background.send({
+    return background.send({
       type: "open-container-tab",
       content: cookieStoreId,
     });

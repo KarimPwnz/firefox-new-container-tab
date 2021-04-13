@@ -18,10 +18,10 @@ async function handleRequest(request) {
 // Popup
 
 let popup = {
-  send: async function (request) {
-    browser.runtime.sendMessage(request);
+  send(request) {
+    return browser.runtime.sendMessage(request);
   },
-  sendContainers: async function () {
+  async sendContainers () {
     let allContainers = await containers.getAll();
     this.send({ type: "containers-list", content: allContainers });
   },
@@ -30,8 +30,8 @@ let popup = {
 // Tab
 
 let tab = {
-  newWithContainer: async function (cookieStoreId) {
-    browser.tabs.create({
+  newWithContainer (cookieStoreId) {
+    return browser.tabs.create({
       cookieStoreId: cookieStoreId,
     });
   },
@@ -40,11 +40,11 @@ let tab = {
 // Containers
 
 let containers = {
-  getAll: async function () {
+  async getAll() {
     let containersObj = await browser.contextualIdentities.query({});
     return this._parseBrowserObj(containersObj);
   },
-  _parseBrowserObj: function (containersObj) {
+  _parseBrowserObj(containersObj) {
     let containersParsed = {};
     for (let container of containersObj) {
       containersParsed[container.name] = container.cookieStoreId;
