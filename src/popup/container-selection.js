@@ -42,7 +42,7 @@ class ContainersBox {
     // Loop through containers and add each to data list as an option
     for (let container in this.containers) {
       let option = document.createElement("option");
-      option.className = option.value = container;
+      option.value = container;
       this.dataList.appendChild(option);
     }
   }
