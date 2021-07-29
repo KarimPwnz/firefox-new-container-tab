@@ -5,7 +5,7 @@ browser.runtime.onMessage.addListener(handleRequest); // listen for messages fro
 // Handlers
 
 async function handleRequest(request) {
-  switch (request.type) {
+  switch(request.type) {
     case "send-containers":
       popup.sendContainers();
       break;
@@ -21,7 +21,7 @@ let popup = {
   send(request) {
     return browser.runtime.sendMessage(request);
   },
-  async sendContainers () {
+  async sendContainers() {
     let allContainers = await containers.getAll();
     this.send({ type: "containers-list", content: allContainers });
   },
@@ -30,7 +30,7 @@ let popup = {
 // Tab
 
 let tab = {
-  newWithContainer (cookieStoreId) {
+  newWithContainer(cookieStoreId) {
     return browser.tabs.create({
       cookieStoreId: cookieStoreId,
     });
